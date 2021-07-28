@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RequestMapping("/response")
 @RestController
@@ -17,8 +18,8 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/student/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable("id") int id) {
-        Student foundStudent = studentService.getStudentById(id);
+    public ResponseEntity<Optional<Student>> getStudent(@PathVariable("id") int id) {
+        Optional<Student> foundStudent = studentService.getStudentById(id);
         if (foundStudent == null) {
             return ResponseEntity.notFound().build();
         } else {
